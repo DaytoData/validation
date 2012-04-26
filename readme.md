@@ -4,7 +4,7 @@ This is a vary basic vaildation thing. It needs no initialisation, just copy and
 
 ##Quick Start
 
- - Copy the JS and PHP from **validation.js** and **
+ - Copy the JS and PHP from **validation.js** and **form-process.php**
  - Add the class 'js_vaildation'
  - Add the **data-required** attribute to any fields you need required
  - Open up form-process.php add/remove any fields from the required array
