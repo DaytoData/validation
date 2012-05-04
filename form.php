@@ -3,24 +3,59 @@
 	<title>Validation</title>
 </head>
 <body>
+<?php if(isset($_SESSION['contactSuccess'])) { //if php was used to submit ?>
+	<h4>Thanks for your enquiry - someone will be in touch soon</h4>
+<?php } 
 
-<form method="post" action="form-process.php" class="js_validation <?php $errors = $_SESSION['contactErrors']; echo (count($errors)) ? ' errorform' : ''; ?>">
+	global $values;
+	global $errors;
+	
+	function field($title, $name, $type='text', $other='') {
+		global $values;
+		global $errors;
+		$reqstar = ($other) ? '<span class="required">*</span>' : '' ;
+		$result  = '<label for="' . $name .'">' . $title . $reqstar . '</label>';
+		$result .= '<input type="' . $type .'" title="' . $title .'" name="' . $name .'" id="' . $name .'" value="' . $values[$name] .'"' . $other .'>';
+		return $result;
+	}
+
+	function required_field($title, $name, $message, $type='text') {
+		global $values;
+		global $errors;
+
+		$errorfield = ($errors[$name]) ? ' class="errorfield"' : '' ;
+		$message = ' data-required="' . $message . '"' . $errorfield;
+		$result = field($title, $name, $type, $message);
+		$result .= ($errors[$name]) ? '<span class="inline error" style="display: inline;">'. $errors[$name] . '</span>' : '';
+		return $result;
+	}
+
+	if(isset($_SESSION['contactSuccess'])) {
+		unset($_SESSION['contactSuccess']);
+		unset($_SESSION['contactValues']);
+		unset($_SESSION['contactErrors']);
+	}
+
+	if(isset($_SESSION['contactValues'])) {
+		$values = $_SESSION['contactValues'];
+		unset($_SESSION['contactValues']);
+	}
+	if(isset($_SESSION['contactErrors'])) {
+		$errors = $_SESSION['contactErrors'];
+		unset($_SESSION['contactErrors']);
+	}
+?>
+	<form class="js_validation" action="vendor-signup-process.php" method="post">
 		<fieldset>
-			<?=(count($errors)) ? '<span class="error long">There appears to be an error. Please make sure you have filled in all the required fields.<br>Those that have been missed are highlited red</span>' : '' ?>
-			<div class="formsfield"><label for="name">Name<span>*</span></label>
-			<input type="text" required id="name" name="name" value="<?=$_SESSION['contactValues']['name']?>"<?=($errors['name']) ? ' class="errorfield"' : '' ?> data-required="Please enter your name" /></div>
-			<div class="formsfield"><label for="email">Email<span>*</span></label>
-			<input type="email" required id="email" name="email" value="<?=$_SESSION['contactValues']['email']?>"<?=($errors['email']) ? ' class="errorfield"' : '' ?>  data-required="Please enter an email address" /></div>
-			<div class="formsfield"><label for="phone">Phone<span>*</span></label>
-			<input type="tel" required id="phone" name="phone" value="<?=$_SESSION['contactValues']['phone']?>"<?=($errors['phone']) ? ' class="errorfield"' : '' ?> data-required="Please enter a phone number" /></div>
-			<div class="formsfield"><label for="subject" name="subject">Subject</label>
-			<input id="subject" name="subject" value="<?=$product->name?>"/></div>
-			<label for="message">Message</label>
-			<textarea id="message" name="message"><?=$_SESSION['contactValues']['message']?></textarea></div>
-			<a class="js_closeform closeform">Close the form</a>
-			<input type="submit" value="Send" />
-			<span class="req">* Required Fields</span>
+				<?=required_field('Your Name', 'name', 'Please enter your name')?>
+				<?=required_field('Email', 'email', 'Please enter your email', 'email')?>
+				<?=required_field('Email', 'tel', 'Please enter your phone number', 'tel')?>
+				<?=field('Something Else', 'other')?>
+
+			<span class="required">* Required Field</span>
+			<input type="submit" title="Send" value="Send" class="sendform">
 		</fieldset>
+		<div class="js_thankyou"></div>
 	</form>
 </body>
 </html>
