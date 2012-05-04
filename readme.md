@@ -6,7 +6,7 @@ This is a vary basic vaildation thing. It needs no initialisation, just copy and
 
 ##Quick Start
 
- - Copy the JS and PHP from **validation.js** and **form-process.php**
+ - Copy the JS and PHP from **validation.js**,  **form-process.php** and **form.php**
  - Add the class 'js_vaildation'
  - Add the **data-required** attribute to any fields you need required
  - Open up form-process.php add/remove any fields from the required array
@@ -17,7 +17,7 @@ Obviously there is a lot more unexplained php (sessions and such) going on, But 
 
 ##Long Start
 
-Below are the beginnings of the long documentation. The working code will be here: http://jsfiddle.net/cPzBC/3/
+Below are the beginnings of the long documentation. The working code will be here: http://jsfiddle.net/cPzBC/3/. PHP can be found here: http://codepad.org/4FyXLojE
 
 **Please note - this documentation is not complete**
 
