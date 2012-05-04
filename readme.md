@@ -2,6 +2,8 @@
 
 This is a vary basic vaildation thing. It needs no initialisation, just copy and paste the js, add a couple of classes and away we go. It works on both input blur (when an input loses focus) and form submission.
 
+**Please Note: the code is not complete and still has some bugs!!**
+
 ##Quick Start
 
  - Copy the JS and PHP from **validation.js** and **form-process.php**
