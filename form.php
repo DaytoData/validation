@@ -24,7 +24,7 @@
 		global $errors;
 
 		$errorfield = ($errors[$name]) ? ' class="errorfield"' : '' ;
-		$message = 'required' . $errorfield;
+		$message = 'data-required="' . $message .'" required' . $errorfield;
 		$result = field($title, $name, $type, $message);
 		$result .= ($errors[$name]) ? '<span class="error">'. $errors[$name] . '</span>' : '';
 		return $result;
