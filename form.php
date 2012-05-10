@@ -13,8 +13,8 @@
 	function field($title, $name, $type='text', $other='') {
 		global $values;
 		global $errors;
-		$reqstar = ($other) ? '<span class="required">*</span>' : '' ;
-		$result  = '<label for="' . $name .'">' . $title . $reqstar . '</label>';
+		$reqstar = ($other) ? '<span class="required inline">*</span>' : '' ;
+		$result  = '<label for="' . $name .'">' . $title . $reqstar . ':</label>';
 		$result .= '<input type="' . $type .'" title="' . $title .'" name="' . $name .'" id="' . $name .'" value="' . $values[$name] .'"' . $other .'>';
 		return $result;
 	}
@@ -24,9 +24,14 @@
 		global $errors;
 
 		$errorfield = ($errors[$name]) ? ' class="errorfield"' : '' ;
-		$message = ' data-required="' . $message . '"' . $errorfield;
+		$message = 'required' . $errorfield;
 		$result = field($title, $name, $type, $message);
-		$result .= ($errors[$name]) ? '<span class="inline error" style="display: inline;">'. $errors[$name] . '</span>' : '';
+		$result .= ($errors[$name]) ? '<span class="error">'. $errors[$name] . '</span>' : '';
+		return $result;
+	}
+
+	function hidden_field($name, $value) {
+		$result = '<input type="hidden" name="' . $name . '" value="' . $value . '" >';
 		return $result;
 	}
 
